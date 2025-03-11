@@ -71,10 +71,53 @@ cd Gaianet-Chat-Bot
 node main.js
 ```
 
+## Setting Up and Running Multiple GaiaNet Nodes (Linux)
+For users who want to deploy multiple GaiaNet nodes, follow these steps:
+
+### Step 1: Grant Execution Permissions
+```sh
+chmod +x install_gaianet_nodes.sh
+```
+
+### Step 2: Start a New Session
+Using `screen` to run nodes in a separate session:
+```sh
+screen -S gaianet-nodes
+```
+
+### Step 3: Run the Installation Script
+```sh
+./install_gaianet_nodes.sh
+```
+
+### Script Overview
+The script will:
+- Create directories for 50 nodes in `$HOME/gaianet/`
+- Install GaiaNet nodes
+- Configure ports (starting from 10000)
+- Initialize and start each node
+- Display node information
+
+### Customization
+To change the number of nodes, edit the script `install_gaianet_nodes.sh`:
+```sh
+mkdir -p $HOME/gaianet/node-{1..50}
+```
+Change `50` to your desired number.
+
+To modify the folder path, update:
+```sh
+--base $HOME/gaianet/node-$i
+```
+
 ## Troubleshooting
 - Ensure `node` and `npm` are installed (`node -v` and `npm -v` should return versions).
 - If missing dependencies, run `npm install` again.
 - If API requests fail, verify authentication and private keys.
+- If nodes do not start, check installation logs using:
+  ```sh
+  tail -f /var/log/syslog | grep gaianet
+  ```
 
 ## License
 This project is licensed under the MIT License.
