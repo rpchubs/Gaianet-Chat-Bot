@@ -87,7 +87,7 @@ screen -S gaianet-nodes
 
 ### Step 3: Run the Installation Script
 ```sh
-./install_gaianet_nodes.sh
+source /root/.bashrc && bash install_gaianet_nodes.sh
 ```
 
 ### Script Overview
