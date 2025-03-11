@@ -25,7 +25,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "colors": "^1.4.0",
     "figlet": "^1.8.0",
+    "fs-extra": "^11.3.0",
     "groq-sdk": "^0.12.0",
     "node-fetch": "^3.3.2",
     "web3": "^4.16.0",
