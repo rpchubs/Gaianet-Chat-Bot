@@ -6,6 +6,10 @@ NUM_NODES=20
 # Base directory where nodes are located
 BASE_DIR="/root/gaianet"
 
+# Load environment variables
+source /root/.bashrc
+echo "Load environment variable"
+
 # Restart each node
 for i in $(seq 1 $NUM_NODES); do
     NODE_DIR="$BASE_DIR/node-$i"

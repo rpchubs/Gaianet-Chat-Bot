@@ -96,9 +96,8 @@ chmod +x restart_gaianet_nodes.sh
 
 Then, execute the script:
 ```sh
-./restart_gaianet_nodes.sh
+source restart_gaianet_nodes.sh
 ```
-
 
 ## 🎯 7. Conclusion
 
