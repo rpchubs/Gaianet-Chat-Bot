@@ -1,0 +1,34 @@
+{
+  "name": "gaia-bot",
+  "version": "1.0.0",
+  "description": "A Node.js application that integrates Groq and Gaianet AI services for interactive chat conversations about Paris tourism.",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "gaia",
+    "gaianet",
+    "gaianet chat bot",
+    "bot",
+    "gaianet chat",
+    "gaianet network",
+    "gaianet automation",
+    "gaianet network bot",
+    "gaianet farm"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rpchubs/Stork-Network-Automation.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "figlet": "^1.8.0",
+    "groq-sdk": "^0.12.0",
+    "node-fetch": "^3.3.2",
+    "web3": "^4.16.0",
+    "winston": "^3.17.0"
+  }
+}
