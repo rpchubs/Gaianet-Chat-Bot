@@ -1,9 +1,9 @@
 import fs from "fs/promises";
 import fetch from "node-fetch";
 import { Web3 } from "web3";
-import { colors } from "./config/colors.js";
-import { displayBanner } from "./config/banner.js";
-import { logger } from "./config/logger.js";
+import { colors } from "../config/colors.js";
+import { displayBanner } from "../config/banner.js";
+import { logger } from "../config/logger.js";
 import path from "path";
 import { fileURLToPath } from "url";
 
