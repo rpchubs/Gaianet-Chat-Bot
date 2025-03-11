@@ -87,7 +87,20 @@ tail -f /var/log/syslog | grep gaianet
 
 ---
 
-## 🎯 6. Conclusion
+## 🔁 6. Restart Gaianet Nodes
+
+Grant execution permission to the installation script:
+```sh
+chmod +x restart_gaianet_nodes.sh
+```
+
+Then, execute the script:
+```sh
+./restart_gaianet_nodes.sh
+```
+
+
+## 🎯 7. Conclusion
 
 Following these steps, you can efficiently install and manage GaiaNet nodes. If you encounter any issues, review the steps or contact GaiaNet support.
 
