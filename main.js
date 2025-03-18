@@ -7,6 +7,11 @@ import { displayBanner } from "./config/banner.js";
 import { CountdownTimer } from "./config/countdown.js";
 import { logger } from "./config/logger.js";
 
+const numberOfCycle = 10; // Number of cycles you want to run
+const groqClient = new Groq({
+  apiKey: "your-groq-api-key", // Your Groq API Key
+});
+
 const API_CONFIG = {
   BASE_URL: "llama.gaia.domains",
   GET_AUTH: "https://api.gaianet.ai/api/v1/users/connect-wallet/",
@@ -27,9 +32,6 @@ const MODEL_CONFIG = {
   },
 };
 
-const groqClient = new Groq({
-  apiKey: "Groq-Api-Key",
-});
 
 const RETRY_CONFIG = {
   MAX_ATTEMPTS: 5,
@@ -58,6 +60,7 @@ const BROWSER_CONFIG = {
   CHROME_VERSION: "131",
   BRAND_VERSION: "24",
 };
+
 
 const timer = new CountdownTimer();
 const w3 = new Web3("https://1rpc.io/base");
@@ -109,10 +112,6 @@ async function getAuthToken(privateKey) {
     }
 
     const data = await response.json();
-    // logger.success(`${colors.success}Access Token: ${data.data.access_token}${colors.reset}`);
-    // logger.success(`${colors.success}API Key: ${data.data.api_key}${colors.reset}`);
-    // logger.success(`${colors.success}Refresh Token: ${data.data.refresh_token}${colors.reset}`);
-    // logger.success(`${colors.success}User ID: ${data.data.user_id}${colors.reset}`);
 
     if (data.code === 0) {
       return { access_token: data.data.access_token, api_key: data.data.api_key };
@@ -417,16 +416,20 @@ async function main() {
       process.exit(1);
     }
 
-    for (const pKey of allPrivateKeys) {
-      const { address: walletAddress } = w3.eth.accounts.privateKeyToAccount(pKey);
-      const maskedAddr = maskAddress(walletAddress);
+    for (let cycle = 1; cycle <= numberOfCycle; cycle++) {
+      logger.info(`${colors.info}========== Starting Cycle #${cycle} ========== ${colors.reset}`);
+      for (const pKey of allPrivateKeys) {
+        const { address: walletAddress } = w3.eth.accounts.privateKeyToAccount(pKey);
+        const maskedAddr = maskAddress(walletAddress);
 
-      logger.info(`${colors.info}========== Starting with Wallet Address: ${maskedAddr} ========== ${colors.reset}`);
-      await runChatForPrivateKey(pKey);
-      logger.info(`${colors.info}========== Finished for Wallet Address: ${maskedAddr} ========== ${colors.reset}\n`);
+        logger.info(`${colors.info}========== Starting with Wallet Address: ${maskedAddr} ========== ${colors.reset}`);
+        await runChatForPrivateKey(pKey);
+        logger.info(`${colors.info}========== Finished for Wallet Address: ${maskedAddr} ========== ${colors.reset}\n`);
+      }
+      logger.info(`${colors.info}========== Finished Cycle #${cycle} ========== ${colors.reset}`);
     }
 
-    logger.info(`${colors.info}All wallets have been processed. Program finished.${colors.reset}`);
+    logger.info(`${colors.info}All cycles have been processed. Program finished.${colors.reset}`);
   } catch (error) {
     logger.error(`${colors.error}Error in main process: ${error}${colors.reset}`);
     logger.error(`${colors.brightRed}Program terminated due to error${colors.reset}`);
