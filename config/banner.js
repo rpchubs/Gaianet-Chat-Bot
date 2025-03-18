@@ -1,6 +1,6 @@
 import chalk from "chalk";
 
-export default function displayBanner() {
+export function displayBanner() {
   console.log(
     chalk.cyan(`
 
